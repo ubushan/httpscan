@@ -1,7 +1,8 @@
 import requests
+import csv
 
-
-sites = ['https://ya.ru', 'https://mail.ru', 'https://rambler.ru', 'https://q.qq', ';']
+path_to_csv = 'sites.csv'
+path_to_res = 'result.csv'
 
 
 def get_code(address):
@@ -19,5 +20,11 @@ def get_code(address):
         return [address, 'Invalid URL']
 
 
-for i in sites:
-    print(get_code(i))
+def get_list():
+    with open(path_to_csv, 'r') as obj:
+        data = csv.reader(obj, delimiter=',')
+        for line in data:
+            print(get_code(''.join(line)))
+
+
+print(get_list())
